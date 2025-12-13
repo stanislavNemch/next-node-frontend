@@ -8,6 +8,7 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: #f8f9fa;
+    min-width: 400px; /* Prevent layout breakage on very small screens */
 }
 :root {
     font-family: var(--font-roboto), sans-serif;

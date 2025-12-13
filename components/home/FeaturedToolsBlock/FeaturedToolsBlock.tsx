@@ -44,7 +44,7 @@ export default async function FeaturedToolsBlock() {
     return (
         <section className={styles.section}>
             <div className="container">
-                <h2 className={styles.heading}>Нещодавно додані</h2>
+                <h2 className={styles.heading}>Популярні інструменти</h2>
 
                 <div className={styles.grid}>
                     {tools.slice(0, 8).map((tool, index) => (
