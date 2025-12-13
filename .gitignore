@@ -1,87 +1,86 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-pnpm-debug.log*
-lerna-debug.log*
+# ===== Editor folders =====
+.vscode/
+.idea/
+.DS_Store
 
-# Environment variables
+# ===== Env files =====
 .env
-.env.local
-.env.development
-.env.test
-.env.production
-.env.*.local
+.env.*
+!.env.example
 
-# Build output
-dist/
-build/
-out/
-*.tsbuildinfo
-
-# Logs
+# ===== Logs =====
 logs/
 *.log
 npm-debug.log*
-pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-lerna-debug.log*
+pnpm-debug.log*
 
-# Testing
-coverage/
+# ===== Diagnostic reports =====
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# ===== Runtime data =====
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# ===== Build / Coverage =====
+build/Release
+coverage
 *.lcov
 .nyc_output
+.babel_cache
+dist
+out
+.nuxt
+.next
+
+# ===== Dependency directories =====
+node_modules/
+jspm_packages/
+bower_components
+web_modules/
+
+# ===== Cache =====
+.npm
 .cache
+.parcel-cache
+.eslintcache
+.stylelintcache
+.node_repl_history
+.yarn-integrity
 
-# IDE - VSCode
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-.history/
-*.code-workspace
+# Yarn v3 PnP
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
-# IDE - WebStorm/JetBrains
-.idea/
-*.iml
-*.iws
-*.ipr
+# ===== Tools =====
+.grunt
+.lock-wscript
+.temp
 
-# OS Files
-.DS_Store
-Thumbs.db
-Desktop.ini
+# ===== Frameworks =====
+.vuepress/dist
+.vitepress/dist
+.vitepress/cache
+.svelte-kit/
+.docusaurus
 
-# Temporary files
-*.tmp
-*.temp
-*.swp
-*.swo
-*~
+# ===== Serverless =====
+.serverless/
 
-# Database
-*.sqlite
-*.sqlite3
-*.db
+# ===== DynamoDB =====
+.dynamodb/
 
-# Upload files (if applicable)
-uploads/
-temp/
+# ===== Firebase =====
+.firebase/
 
-# Documentation (optional)
-# docs/
-
-# PM2
-.pm2/
-
-# Docker
-.dockerignore
-
-# Misc
-.npmrc
-.yarnrc
+# ===== Testing =====
+.vscode-test
+lib-cov
