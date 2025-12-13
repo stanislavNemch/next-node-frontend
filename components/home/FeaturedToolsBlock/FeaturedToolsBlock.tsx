@@ -2,6 +2,7 @@ import { Tool } from "@/types/tool";
 import { ToolsResponse } from "@/lib/api/tools";
 import styles from "./FeaturedToolsBlock.module.css";
 import ToolCard from "@/components/tools/ToolCard/ToolCard";
+import Link from "next/link";
 
 // Функция для получения данных на сервере
 async function getFeaturedTools(): Promise<Tool[]> {
@@ -46,9 +47,15 @@ export default async function FeaturedToolsBlock() {
                 <h2 className={styles.heading}>Нещодавно додані</h2>
 
                 <div className={styles.grid}>
-                    {tools.map((tool, index) => (
+                    {tools.slice(0, 8).map((tool, index) => (
                         <ToolCard key={tool._id || index} tool={tool} />
                     ))}
+                </div>
+
+                <div className={styles.buttonWrapper}>
+                    <Link href="/tools" className={styles.viewAllButton}>
+                        До всіх інструментів
+                    </Link>
                 </div>
             </div>
         </section>

@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
-const roboto = Inter({
-    weight: ["400", "500", "700"], // какие начертания нужны
-    subsets: ["latin", "cyrillic"], // можно оставить только "latin", если кириллица не нужна
-    display: "swap", // чтобы не было задержки при загрузке
-    variable: "--font-Inter", // создаст CSS-переменную для использования
+const inter = Inter({
+    weight: ["400", "500", "600", "700"], // Regular, Medium, SemiBold, Bold
+    subsets: ["latin", "cyrillic"],
+    display: "swap",
+    variable: "--font-Inter",
 });
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`${roboto.variable}`}>
+            <body className={`${inter.variable}`}>
                 <main>{children}</main>
                 {modal}
             </body>
