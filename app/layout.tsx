@@ -11,21 +11,19 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-    title: "Tools – Create Tools",
-    description: "Create, organize and manage your notes easily with Tools.",
+    title: {
+        template: "%s | ToolNext",
+        default: "ToolNext — Оренда професійних інструментів",
+    },
+    description:
+        "Зручний сервіс для оренди та здачі будівельних інструментів. Широкий вибір категорій, чесні рейтинги та відгуки. Знайдіть потрібний інструмент або заробляйте на власному обладнанні.",
     openGraph: {
-        title: "NoteHub – Create Tools",
+        title: "ToolNext — Оренда професійних інструментів",
         description:
-            "Create, organize and manage your notes easily with Tools.",
-        url: "",
-        images: [
-            {
-                url: "",
-                width: 1200,
-                height: 630,
-                alt: "Tools gifts",
-            },
-        ],
+            "Платформа для оренди інструментів. Дрилі, пили, генератори та інше обладнання для вашого ремонту та будівництва.",
+        siteName: "ToolNext",
+        locale: "uk_UA",
+        type: "website",
     },
 };
 
