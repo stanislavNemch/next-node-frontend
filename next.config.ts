@@ -20,7 +20,12 @@ const nextConfig: NextConfig = {
                 hostname: "ftp.goit.study",
                 pathname: "**",
             },
+            {
+                protocol: "https",
+                hostname: "toolsbackend-zzml.onrender.com",
+            },
         ],
+        unoptimized: true,
     },
 };
 

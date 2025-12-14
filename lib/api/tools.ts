@@ -3,7 +3,7 @@ import { Tool } from "@/types/tool";
 // Базовий URL бекенду
 const API_URL =
     process.env.NEXT_PUBLIC_API_URL ||
-    "https://toolsbackend-zzml.onrender.com/api/tools";
+    "https://toolsbackend-zzml.onrender.com/api";
 
 // Типи для параметрів запиту
 export interface GetToolsParams {
@@ -41,11 +41,11 @@ export const getTools = async (
         headers: {
             "Content-Type": "application/json",
         },
-        cache: "no-store", // Щоб завжди отримувати актуальні дані
+        cache: "no-store",
     });
 
     if (!res.ok) {
-        const errorData = await res.json();
+        const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || "Failed to fetch tools");
     }
 
@@ -68,7 +68,7 @@ export const getToolById = async (toolId: string): Promise<Tool> => {
         if (res.status === 404) {
             throw new Error("Tool not found");
         }
-        const errorData = await res.json();
+        const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || "Failed to fetch tool details");
     }
 
@@ -83,12 +83,11 @@ export const createTool = async (formData: FormData): Promise<Tool> => {
     const res = await fetch(`${API_URL}/tools`, {
         method: "POST",
         body: formData,
-        // credentials: 'include' потрібен, щоб передати куки (accessToken) на бекенд
         credentials: "include",
     });
 
     if (!res.ok) {
-        const errorData = await res.json();
+        const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || "Failed to create tool");
     }
 
@@ -109,7 +108,7 @@ export const updateTool = async (
     });
 
     if (!res.ok) {
-        const errorData = await res.json();
+        const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || "Failed to update tool");
     }
 
@@ -122,14 +121,11 @@ export const updateTool = async (
 export const deleteTool = async (toolId: string): Promise<void> => {
     const res = await fetch(`${API_URL}/tools/${toolId}`, {
         method: "DELETE",
-        headers: {
-            "Content-Type": "application/json",
-        },
         credentials: "include",
     });
 
     if (!res.ok) {
-        const errorData = await res.json();
+        const errorData = await res.json().catch(() => ({}));
         throw new Error(errorData.message || "Failed to delete tool");
     }
 };

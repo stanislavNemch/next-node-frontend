@@ -9,42 +9,52 @@ import styles from "./ToolCard.module.css";
 
 interface ToolCardProps {
     tool: Tool;
+    priority?: boolean;
 }
 
-export default function ToolCard({ tool }: ToolCardProps) {
-    // Получаем статус авторизации из Zustand стора
+export default function ToolCard({ tool, priority = false }: ToolCardProps) {
     const { isAuthenticated } = useAuthStore();
 
-    // Заглушка для изображения, если массив images пуст
-    let mainImage = "/image/Placeholder Image.png";
+    // Безопасная обработка изображений
+    const getMainImage = (): string => {
+        const placeholder = "/image/Placeholder Image.png";
 
-    if (tool.images) {
-        if (Array.isArray(tool.images) && tool.images.length > 0) {
-            mainImage = tool.images[0];
-        } else if (typeof tool.images === "string") {
-            mainImage = tool.images;
+        if (!tool.images) return placeholder;
+
+        // Если это строка
+        if (typeof tool.images === "string") {
+            return tool.images.trim() || placeholder;
         }
-    }
+
+        // Если это массив
+        if (Array.isArray(tool.images)) {
+            const validImage = tool.images.find(
+                (img) => img && typeof img === "string" && img.trim()
+            );
+            return validImage || placeholder;
+        }
+
+        return placeholder;
+    };
+
+    const mainImage = getMainImage();
 
     const handleDelete = (e: React.MouseEvent) => {
-        e.preventDefault(); // Предотвращаем переход по ссылке, если кнопка внутри Link (хотя здесь мы разделим области)
-        // Логика открытия ConfirmationModal
-        // В зависимости от реализации модалок в проекте (через URL или State), здесь будет вызов.
-        // Например, если через Route Intercepting:
-        // router.push(`/dashboard/tools/${tool._id}/delete`);
-        console.log("Open delete confirmation for:", tool._id);
+        e.preventDefault();
+        // TODO: Реализовать через модальное окно подтверждения
     };
 
     // Формируем звезды рейтинга
     const renderStars = (rating: number) => {
-        // Округляем до целого или половин (для простоты покажем целые)
         const stars = [];
+        const roundedRating = Math.round(rating);
+
         for (let i = 1; i <= 5; i++) {
             stars.push(
                 <span
                     key={i}
                     className={
-                        i <= Math.round(rating)
+                        i <= roundedRating
                             ? styles.starFilled
                             : styles.starEmpty
                     }
@@ -65,6 +75,11 @@ export default function ToolCard({ tool }: ToolCardProps) {
                     fill
                     className={styles.image}
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority={priority}
+                    onError={(result) => {
+                        result.currentTarget.src =
+                            "/image/Placeholder Image.png";
+                    }}
                 />
             </div>
 
@@ -78,10 +93,9 @@ export default function ToolCard({ tool }: ToolCardProps) {
 
                 <div className={styles.actions}>
                     {isAuthenticated ? (
-                        // Авторизованный пользователь
                         <>
                             <Link
-                                href={`/dashboard/tools/${tool._id}/edit`} // Исправлен путь согласно структуре dashboard
+                                href={`/dashboard/tools/${tool._id}/edit`}
                                 className={styles.editButton}
                             >
                                 Редагувати
@@ -96,7 +110,6 @@ export default function ToolCard({ tool }: ToolCardProps) {
                             </button>
                         </>
                     ) : (
-                        // НЕавторизованный пользователь
                         <Link
                             href={`/tools/${tool._id}`}
                             className={styles.detailsButton}

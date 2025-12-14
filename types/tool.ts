@@ -25,7 +25,7 @@ export interface Tool {
     name: string;
     description: string;
     pricePerDay: number;
-    images: string[];
+    images: string | string[];
     terms: string;
     // Specifications приходить як об'єкт { "Ключ": "Значення" }
     specifications?: Record<string, string>;
