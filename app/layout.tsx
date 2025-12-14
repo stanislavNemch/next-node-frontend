@@ -2,6 +2,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/layout/Header/Header";
 
 const inter = Inter({
     weight: ["400", "500", "600", "700"], // Regular, Medium, SemiBold, Bold
@@ -39,6 +40,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
+            <Header />
             <body className={`${inter.variable}`}>
                 <main>{children}</main>
                 {modal}

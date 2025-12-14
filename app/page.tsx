@@ -29,7 +29,6 @@ export const metadata: Metadata = {
 export default function HomePage() {
     return (
         <main>
-            <Header />
             <FeaturedToolsBlock />
         </main>
     );
